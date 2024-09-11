@@ -1,18 +1,20 @@
 public class Solution {
     public IList<IList<string>> GroupAnagrams(string[] strs) {
-        var anagrams = new Dictionary<string, List<string>>();
-        foreach (var str in strs) {
-            var count = new int[26];
-            foreach (var ch in str) {
-                count[ch - 'a']++;
+         Dictionary<string, List<string>> ans = new Dictionary<string,List<string>>();
+        foreach( string str in strs){
+            int[] count = new int[26];
+            foreach(char c in str){
+                count[c - 'a']++;
             }
-            var key = string.Join('#', count);
-            if (!anagrams.ContainsKey(key)) {
-                anagrams[key] = new List<string>();
+            string key = string.Join(',',count);
+            if(ans.ContainsKey(key)){
+                ans[key].Add(str);
             }
-            anagrams[key].Add(str);
+            else{
+                ans[key] = new List<string>();
+                ans[key].Add(str);
+            }
         }
-        return anagrams.Values.Cast<IList<string>>().ToList();
+        return new List<IList<string>>(ans.Values);
     }
 }
-
