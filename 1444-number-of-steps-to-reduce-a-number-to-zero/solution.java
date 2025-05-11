@@ -2,7 +2,6 @@ public class Solution {
     public int numberOfSteps(int num) {
         return rec(num, 0);
     }
-
     static int rec(int num, int count) {
         if(num == 0) {
             return count; 
