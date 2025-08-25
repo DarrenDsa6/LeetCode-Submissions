@@ -1,19 +1,20 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if (s.length() != t.length()) return false;
-
-        int[] count = new int[26]; // Only 26 lowercase letters
-
-        for (char c : s.toCharArray()) {
-            count[c - 'a']++; // Increment count for s
+        if(s.length() != t.length()){
+            return false;
         }
-
-        for (char c : t.toCharArray()) {
-            count[c - 'a']--; 
-            if (count[c - 'a'] < 0) return false; 
+        else if(s.length() == 0 && t.length() == 0){
+            return true;
         }
-
-        return true;
+        else{
+            HashMap<Character, Integer> countS = new HashMap<>();
+            HashMap<Character, Integer> countT = new HashMap<>();
+            for (int i = 0; i < s.length(); i++) {
+                countS.put(s.charAt(i), countS.getOrDefault(s.charAt(i), 0) + 1);
+                countT.put(t.charAt(i), countT.getOrDefault(t.charAt(i), 0) + 1);
+            }
+            return countS.equals(countT);
+        }
     }
 }
 
