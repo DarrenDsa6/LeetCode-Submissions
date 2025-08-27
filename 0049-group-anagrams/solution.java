@@ -7,7 +7,10 @@ class Solution {
                 count[c - 'a']++;
             }
             String key = Arrays.toString(count);
-            ans.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+            if (!ans.containsKey(key)) {
+                ans.put(key, new ArrayList<>());
+            }
+            ans.get(key).add(s);
         }
 
         return new ArrayList<>(ans.values());
