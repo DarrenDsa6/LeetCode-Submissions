@@ -1,15 +1,16 @@
+from typing import List
+
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        k = len(numbers) - 1
-        j = 0
-        if k==-1:
-            return k
-        while j<k:
-            sum = numbers[j] + numbers[k]
-            if sum==target:
-                return [j+1, k+1]
-            elif sum>target:
-                k -= 1
+        i = 0
+        j = len(numbers) - 1
+        while i < j:
+            s = numbers[i] + numbers[j]
+            if s > target:
+                j -= 1
+            elif s < target:
+                i += 1
             else:
-                j+=1
-        return -1
+                return [i+1, j+1]
+        return [-1, -1]
+
