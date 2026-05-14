@@ -1,28 +1,28 @@
-from typing import List
-
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        nums.sort()  # Sort the array to help avoid duplicates
-        length = len(nums)
-        ans = []
-        
-        for i in range(length - 2):
-            if i > 0 and nums[i] == nums[i - 1]:
-                continue  # Skip duplicate elements
-            left, right = i + 1, length - 1
-            while left < right:
-                total = nums[i] + nums[left] + nums[right]
-                if total < 0:
-                    left += 1
-                elif total > 0:
-                    right -= 1
-                else:
-                    ans.append([nums[i], nums[left], nums[right]])
-                    while left < right and nums[left] == nums[left + 1]:
-                        left += 1  # Skip duplicate elements
-                    while left < right and nums[right] == nums[right - 1]:
-                        right -= 1  # Skip duplicate elements
-                    left += 1
-                    right -= 1
-        return ans
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+        res = []
+        nums.sort()
 
+        for i, num in enumerate(nums):
+            if i>0 and num == nums[i-1]:
+                continue
+
+            l = i+1
+            r= len(nums)-1
+
+            while(l<r):
+                sum = nums[l] + nums[r]
+                if sum == -num:
+                    res.append([nums[i], nums[l], nums[r]])
+                    while(l<r and nums[l+1] == nums[l]):
+                        l+=1
+                    while(l<r and nums[r-1] == nums[r]):
+                        r-=1
+                    l +=1
+                    r-=1
+                elif sum > -num:
+                    r -= 1
+                else:
+                    l +=1
+                
+        return res
