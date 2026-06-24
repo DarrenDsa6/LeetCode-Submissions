@@ -1,18 +1,13 @@
-class Solution(object):
-    def isPalindrome(self, x):
-        j=[]
-        i=x
-        if( x<0):
-            return 0
-        while(i!=0):
-            j.append(i%10)  
-            i=i//10
-        p=len(j)
-        if(p==2):
-            if(j[1]!=j[0]):
-                return 0
-        else:
-            for i in range(0,p//2):
-                if(j[i]!=j[-(i+1)]):
-                    return 0
-        return 1
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0 or (x % 10 == 0 and x != 0):
+            return False
+    
+        reversed_half = 0
+        while x > reversed_half:
+            reversed_half = reversed_half * 10 + x % 10
+            x //= 10
+        
+        return x == reversed_half or x == reversed_half // 10
+
+        
