@@ -16,3 +16,4 @@ class Solution:
                 else:
                     end = mid - 1
         return -1
+
