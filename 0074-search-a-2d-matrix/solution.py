@@ -1,17 +1,31 @@
-class Solution(object):
-    def searchMatrix(self, matrix, target):
-        """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
-        """
-        a=len(matrix)
-        b=len(matrix[0])
-        
-        for i in range(0,a):
-            if(target<matrix[i][b-1] or target==matrix[i][b-1]):
-                for j in range(0,b):
-                    if(target==matrix[i][j]):
-                        return 1
-                return 0
-        
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        if not matrix or not matrix[0]:
+            return False
+
+        rows, cols = len(matrix), len(matrix[0])
+        top, bottom = 0, rows - 1
+        while top <= bottom:
+            mid = (top + bottom) // 2
+            if target < matrix[mid][0]:
+                bottom = mid - 1
+            elif target > matrix[mid][-1]:
+                top = mid + 1
+            else:
+                break
+        else:
+            return False
+
+        row = (top + bottom) // 2
+        left, right = 0, cols - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if matrix[row][mid] == target:
+                return True
+            elif matrix[row][mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return False
+
